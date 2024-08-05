@@ -1,3 +1,6 @@
+// Trick to get global image types working
+/// <reference path="../image-types.d.ts" />
+
 import { extname } from 'path'
 import type { Plugin } from 'rollup'
 import { createFilter, FilterPattern } from '@rollup/pluginutils'
@@ -59,7 +62,7 @@ async function getTemplateData({
   return { dataUri, blurDataUri }
 }
 
-export default function imageBlur(opts: PluginOptions = {}): Plugin {
+export default function imageBlur<A>(opts: PluginOptions = {}): Plugin<A> {
   const options = Object.assign({}, defaults, opts)
   const filter = createFilter(options.include, options.exclude)
 

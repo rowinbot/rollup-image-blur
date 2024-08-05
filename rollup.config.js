@@ -39,12 +39,6 @@ module.exports = [
   {
     input: './src/index.ts',
     output: [{ file: 'dist/index.d.ts', format: 'es' }],
-    plugins: [
-      dts(),
-      pluginCopy({
-        targets: [{ src: 'src/types.d.ts', dest: 'dist' }],
-        hook: 'writeBundle',
-      }),
-    ],
+    plugins: [dts()],
   },
 ]
