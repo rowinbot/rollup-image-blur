@@ -1,35 +1,35 @@
 declare module '*.jpg' {
-  export const blurImg: string
-  const value: string
-  export default value
+  export const blurDataUri: string
+  export const imageUri: string
+  export default imageUri
 }
 
 declare module '*.jpeg' {
-  export const blurImg: string
-  const value: string
-  export default value
+  export const blurDataUri: string
+  export const imageUri: string
+  export default imageUri
 }
 
 declare module '*.png' {
-  export const blurImg: string
-  const value: string
-  export default value
+  export const blurDataUri: string
+  export const imageUri: string
+  export default imageUri
 }
 
 declare module '*.gif' {
-  export const blurImg: string
-  const value: string
-  export default value
+  export const blurDataUri: string
+  export const imageUri: string
+  export default imageUri
 }
 
 declare module '*.svg' {
-  export const blurImg: string
-  const value: string
-  export default value
+  export const blurDataUri: string
+  export const imageUri: string
+  export default imageUri
 }
 
 declare module '*.webp' {
-  export const blurImg: string
-  const value: string
-  export default value
+  export const blurDataUri: string
+  export const imageUri: string
+  export default imageUri
 }

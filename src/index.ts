@@ -39,10 +39,10 @@ const mimeTypes: Record<string, string> = {
 }
 
 const template = ({ dataUri, blurDataUri }: ITemplateData) => `
-  const img = "${dataUri}";
-  export const blurImg = "${blurDataUri}";
+  export const imageUri = "${dataUri}";
+  export const blurDataUri = "${blurDataUri}";
 
-  export default img;
+  export default imageUri;
 `
 
 async function getTemplateData({
