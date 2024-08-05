@@ -8,7 +8,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "typings": "dist/index.d.ts",
+  "typings": "dist/types/index.d.ts",
   "scripts": {
     "test": "vitest",
     "build": "rm -rf dist && rollup -c",
