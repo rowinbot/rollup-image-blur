@@ -12,8 +12,9 @@
   "scripts": {
     "test": "vitest",
     "build": "rm -rf dist && rollup -c",
+    "release": "npm version minor && npm run build && npm publish",
     "prerelease": "npm run test -- --no-watch && npm run build",
-    "prepublish": "prerelease"
+    "prepublish": "npm run prerelease"
   },
   "license": "MIT",
   "files": [
@@ -26,8 +27,6 @@
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@types/jsdom": "^21.1.0",
     "@types/node": "^18.14.6",
-    "@types/parse-numeric-range": "^0.0.1",
-    "@types/workerpool": "^6.1.1",
     "esbuild": "^0.17.11",
     "jsdom": "^21.1.0",
     "rollup": "^3.29.4",
@@ -36,12 +35,12 @@
     "rollup-plugin-polyfill-node": "^0.12.0",
     "rollup-plugin-typescript2": "^0.34.1",
     "typescript": "^4.9.5",
+    "@rollup/pluginutils": "^5.1.0",
     "vitest": "^0.29.2"
   },
   "dependencies": {
-    "@rollup/pluginutils": "^5.1.0",
-    "lodash": "^4.17.21",
     "mini-svg-data-uri": "^1.4.4",
+    "lodash": "^4.17.21",
     "sharp": "^0.33.4"
   }
 }
