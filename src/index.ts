@@ -16,7 +16,7 @@ interface IImageData {
   filePath: string
 }
 
-export interface ImagePluginOptions {
+export interface PluginOptions {
   exclude?: FilterPattern
   include?: FilterPattern
 }
@@ -59,12 +59,12 @@ async function getTemplateData({
   return { dataUri, blurDataUri }
 }
 
-export default function image(opts: ImagePluginOptions = {}): Plugin {
+export default function imageBlur(opts: PluginOptions = {}): Plugin {
   const options = Object.assign({}, defaults, opts)
   const filter = createFilter(options.include, options.exclude)
 
   return {
-    name: 'image',
+    name: 'image-blur',
 
     async load(id: string) {
       if (!filter(id)) {

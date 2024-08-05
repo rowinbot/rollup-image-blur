@@ -1,8 +1,8 @@
 const camelCase = require('lodash/camelcase')
 const typescript = require('rollup-plugin-typescript2')
 
-const rollupPluginCopy = require('rollup-plugin-copy')
 const { default: dts } = require('rollup-plugin-dts')
+const pluginCopy = require('rollup-plugin-copy')
 const pluginCommonjs = require('@rollup/plugin-commonjs')
 const pluginJson = require('@rollup/plugin-json')
 const pluginPolyfillNode = require('rollup-plugin-polyfill-node')
@@ -28,12 +28,6 @@ module.exports = [
     ],
     plugins: [
       typescript({ useTsconfigDeclarationDir: true }),
-      rollupPluginCopy({
-        targets: [
-          { src: 'src/**/*.json', dest: 'dist' },
-          { src: 'languages/**/*', dest: 'dist/languages' },
-        ],
-      }),
       pluginCommonjs(),
       pluginJson(),
       pluginNodeResolve({
@@ -45,6 +39,12 @@ module.exports = [
   {
     input: './src/index.ts',
     output: [{ file: 'dist/index.d.ts', format: 'es' }],
-    plugins: [dts()],
+    plugins: [
+      dts(),
+      pluginCopy({
+        targets: [{ src: 'src/types.d.ts', dest: 'dist' }],
+        hook: 'writeBundle',
+      }),
+    ],
   },
 ]
