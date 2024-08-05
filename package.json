@@ -1,7 +1,7 @@
 {
   "name": "@rowinbot/rollup-image-blur",
   "author": "Rowin Hernandez",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "private": false,
