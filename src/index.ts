@@ -16,6 +16,7 @@ interface IImageData {
   format: string
   isSvg: boolean
   mime: string
+  relativePath: string
   filePath: string
 }
 
@@ -41,19 +42,17 @@ const mimeTypes: Record<string, string> = {
 const template = ({ dataUri, blurDataUri }: ITemplateData) => `
   export const imageUri = "${dataUri}";
   export const blurDataUri = "${blurDataUri}";
+  console.log('loading up image')
 
   export default imageUri;
 `
 
 async function getTemplateData({
-  format,
   isSvg,
-  mime,
+  relativePath,
   filePath,
 }: IImageData): Promise<ITemplateData> {
-  const dataUri = isSvg
-    ? svgToMiniDataURI(filePath)
-    : `data:${mime};${format},${filePath}`
+  const dataUri = isSvg ? svgToMiniDataURI(filePath) : relativePath
 
   const blurDataUri = isSvg
     ? dataUri
@@ -69,7 +68,7 @@ export default function imageBlur<A>(opts: PluginOptions = {}): Plugin<A> {
   return {
     name: 'image-blur',
 
-    async load(id: string) {
+    async transform(initialCode, id) {
       if (!filter(id)) {
         return null
       }
@@ -79,6 +78,8 @@ export default function imageBlur<A>(opts: PluginOptions = {}): Plugin<A> {
         // not an image
         return null
       }
+      // TODO: Improve to be less brittle / tightly coupled to Vite
+      const imagePath = initialCode.split('"')[1]
 
       this.addWatchFile(id)
       const isSvg = mime === mimeTypes['.svg']
@@ -87,9 +88,11 @@ export default function imageBlur<A>(opts: PluginOptions = {}): Plugin<A> {
         format,
         isSvg,
         mime,
+        relativePath: imagePath,
         filePath: id,
       })
       const code = template(templateData)
+      console.warn(id, code)
 
       return code.trim()
     },
