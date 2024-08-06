@@ -42,8 +42,6 @@ const mimeTypes: Record<string, string> = {
 const template = ({ dataUri, blurDataUri }: ITemplateData) => `
   export const imageUri = "${dataUri}";
   export const blurDataUri = "${blurDataUri}";
-  console.log('loading up image')
-
   export default imageUri;
 `
 
@@ -92,7 +90,6 @@ export default function imageBlur<A>(opts: PluginOptions = {}): Plugin<A> {
         filePath: id,
       })
       const code = template(templateData)
-      console.warn(id, code)
 
       return code.trim()
     },
