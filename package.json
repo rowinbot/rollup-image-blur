@@ -19,6 +19,7 @@
   "license": "MIT",
   "files": [
     "dist",
+    "image-types.d.ts",
     "README.md"
   ],
   "devDependencies": {
